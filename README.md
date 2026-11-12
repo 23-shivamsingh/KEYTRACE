@@ -109,12 +109,4 @@ The public website is a standalone, in-browser demonstration. It does not connec
 - Estimated WPM is an approximation based on key-event counts, not a precise typing assessment.
 - The project does not provide remote monitoring, authentication, a database, or a WebSocket API.
 
-## Background, license and attribution
-
-KEYTRACE is a redesigned, consent-based educational project developed from the idea and MIT-licensed starting point of [ramprasathmk/keylogger](https://github.com/ramprasathmk/keylogger). The new version uses a different interface and intentionally does **not** retain the original system-wide keylogging behavior.
-
-The original MIT copyright and permission notice is preserved in [`LICENSE`](LICENSE). The redesigned interface and additional educational functionality are maintained in this repository.
-
----
-
 **Built for cybersecurity education, experimentation, and privacy-aware software design.**
