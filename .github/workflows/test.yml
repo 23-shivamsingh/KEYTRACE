@@ -1,0 +1,23 @@
+name: Check desktop and web lab
+on:
+  push:
+  pull_request:
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Compile Python source
+        run: python -m compileall -q keylogger.py keyboard_lab
+      - name: Python tests
+        run: python -m unittest discover -s tests -v
+      - name: Web unit tests
+        run: node --test web/metrics.test.cjs
+      - name: Verify no global keylogger dependency
+        run: '! grep -R -n "from pynput\|import pynput" --include="*.py" .'

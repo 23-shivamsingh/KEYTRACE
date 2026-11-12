@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#090e18" />
+  <meta name="description" content="KEYTRACE is a local-only, consent-first keyboard event learning lab. Explore input metrics without collecting your typed text." />
+  <link rel="icon" type="image/svg+xml" href="./assets/icon.svg" />
+  <link rel="apple-touch-icon" href="./assets/icon.png" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>KEYTRACE — Keyboard Event Lab</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Sidebar">
+      <a class="brand" href="#dashboard" aria-label="KEYTRACE dashboard">
+        <span class="brand-symbol" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M10 8H5v16h5M22 8h5v16h-5M19.5 7 12.5 25" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span>KEYTRACE<span class="brand-dot">.</span><small>KEYBOARD EVENT LAB</small></span>
+      </a>
+      <div class="workspace-name">WORKSPACE <span>01</span></div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a href="#dashboard" class="nav-link active"><span class="nav-icon">◈</span> Overview <span class="nav-arrow">⌁</span></a>
+        <a href="#playground" class="nav-link"><span class="nav-icon">⌘</span> Input playground</a>
+        <a href="#analytics" class="nav-link"><span class="nav-icon">▤</span> Analytics</a>
+        <a href="#privacy" class="nav-link"><span class="nav-icon">◇</span> Privacy & safety</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="local-card"><span class="local-indicator"></span><div><strong>Local-only mode</strong><p>No server. No account. No tracking.</p></div></div>
+        <p class="sidebar-credit">OPEN-SOURCE LEARNING TOOL<br><span>v2.0 · REDESIGNED EDITION</span></p>
+      </div>
+    </aside>
+
+    <div class="main-wrap" id="dashboard">
+      <header class="topbar">
+        <div class="breadcrumbs">WORKSPACE <span>/</span> <strong>OVERVIEW</strong></div>
+        <div class="top-actions"><div class="online-pill"><i></i> PRIVATE SESSION</div><div class="top-avatar">KT</div></div>
+      </header>
+      <main class="main-content">
+        <div class="section-title-row">
+          <div>
+            <p class="eyebrow"><span class="tiny-spark">✳</span> INTERACTIVE SECURITY EDUCATION</p>
+            <h1>See how input works.<br><span>Keep what you type private.</span></h1>
+            <p class="subheading">Explore keyboard events in a controlled sandbox. Understand speed, patterns, and key categories without recording your actual text.</p>
+          </div>
+          <div class="overview-art" aria-hidden="true"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="glass-key glass-key-one">⌘</div><div class="glass-key glass-key-two">K</div><div class="glass-key glass-key-three">↵</div><div class="scanline"></div></div>
+        </div>
+
+        <section aria-label="Session metrics" class="metrics-grid">
+          <article class="metric-card"><div class="metric-head">KEY EVENTS <span class="metric-icon">⌨</span></div><div class="metric-big" id="totalCount">0<span class="metric-unit">events</span></div><div class="metric-bottom"><span class="metric-stamp">01</span> Recorded in demo field</div></article>
+          <article class="metric-card"><div class="metric-head">TYPING SPEED <span class="metric-icon">↗</span></div><div class="metric-big" id="wpmCount">0<span class="metric-unit">WPM</span></div><div class="metric-bottom"><span class="metric-stamp">02</span> 5-key word estimate</div></article>
+          <article class="metric-card"><div class="metric-head">SESSION TIME <span class="metric-icon">◷</span></div><div class="metric-big" id="timeCount">00:00</div><div class="metric-bottom"><span class="metric-stamp">03</span> Active since starting</div></article>
+          <article class="metric-card status-metric"><div class="metric-head">SESSION STATUS <span class="metric-icon">◎</span></div><div class="metric-big status-name" id="sessionLabel">Ready<span class="status-small-dot"></span></div><div class="metric-bottom"><span class="metric-stamp">04</span> Awaiting explicit consent</div></article>
+        </section>
+
+        <div class="content-grid" id="playground">
+          <section class="panel playground-panel">
+            <div class="panel-top"><div><p class="panel-kicker">01 / EXPERIMENT</p><h2>Input playground</h2></div><span class="panel-badge"><i id="recDot"></i><span id="liveBadge">NOT RECORDING</span></span></div>
+            <p class="panel-desc">Press start, then type sample text into the field below. Only events occurring inside the box are counted.</p>
+            <label class="input-caption" for="typingPad">SANDBOX INPUT <span>DEMO FIELD ONLY</span></label>
+            <textarea id="typingPad" class="typing-pad" placeholder="Your test playground is locked. Start a session to try it." disabled spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="typingNotice"></textarea>
+            <div class="input-note" id="typingNotice"><span>◉</span> Never enter passwords, private messages, or personal information.</div>
+            <label class="consent-row"><input id="consent" type="checkbox"><span>I understand this is a test field and will use disposable sample text.</span></label>
+            <div class="control-row"><button type="button" class="btn btn-primary" id="startBtn" disabled><span class="button-icon">▶</span> Start session</button><button type="button" class="btn btn-secondary" id="stopBtn" disabled><span>■</span> Stop & wipe</button><button type="button" class="btn btn-text" id="resetBtn">↺ Reset</button></div>
+          </section>
+          <section class="panel events-panel">
+            <div class="panel-top"><div><p class="panel-kicker">02 / LIVE FEED</p><h2>Event stream</h2></div><div class="stream-counter"><span id="feedCount">00</span> shown</div></div>
+            <p class="panel-desc">Real-time categories, not actual keys. Your typed characters never enter this feed.</p>
+            <div class="feed-head"><span>EVENT TYPE</span><span>RELATIVE TIME</span></div>
+            <div class="event-feed" id="eventFeed" aria-live="polite" aria-relevant="additions text"><div class="empty-feed"><div class="empty-icon">◌</div><strong>Ready when you are</strong><p>Input events will appear here once you start your session.</p></div></div>
+            <div class="stream-footer"><span><span class="mini-flash"></span> Privacy-safe classification</span><span>Last 6 events</span></div>
+          </section>
+        </div>
+
+        <div class="analytics-grid" id="analytics">
+          <section class="panel distribution-panel"><div class="panel-top"><div><p class="panel-kicker">03 / BREAKDOWN</p><h2>Input categories</h2></div><span class="card-corner-number">5 TYPES</span></div><div class="categories" id="categoryBars">
+            <div class="bar-line" data-category="letters"><div class="bar-text">Letters <strong>0</strong></div><div class="bar-track"><div class="bar-fill letter-fill"></div></div></div>
+            <div class="bar-line" data-category="numbers"><div class="bar-text">Numbers <strong>0</strong></div><div class="bar-track"><div class="bar-fill number-fill"></div></div></div>
+            <div class="bar-line" data-category="editing"><div class="bar-text">Editing <strong>0</strong></div><div class="bar-track"><div class="bar-fill editing-fill"></div></div></div>
+            <div class="bar-line" data-category="navigation"><div class="bar-text">Navigation <strong>0</strong></div><div class="bar-track"><div class="bar-fill navigation-fill"></div></div></div>
+            <div class="bar-line" data-category="other"><div class="bar-text">Other <strong>0</strong></div><div class="bar-track"><div class="bar-fill other-fill"></div></div></div>
+          </div></section>
+          <section class="panel timeline-panel"><div class="panel-top"><div><p class="panel-kicker">04 / ACTIVITY</p><h2>Input activity</h2></div><button type="button" id="exportBtn" class="export-btn" disabled>↓ Export stats</button></div><div class="chart-wrap"><div class="chart-labels"><span>ACTIVITY OVER TIME</span><span>RELATIVE EVENTS</span></div><canvas id="activityCanvas" aria-label="Keyboard input event activity chart" role="img"></canvas><div class="chart-footer"><span>PAST 30 SECONDS</span><span><i></i> Event count</span></div></div></section>
+        </div>
+
+        <section class="privacy-panel" id="privacy"><div class="privacy-intro"><span class="privacy-mark">◇</span><div><p class="panel-kicker">SECURITY IS A FEATURE</p><h2>Designed to teach, not to track.</h2><p>Your browser handles the demonstration on this device. We never collect hidden background typing or send any data to a server.</p></div></div><div class="privacy-facts"><div><strong>01</strong><span>Visible opt-in</span></div><div><strong>02</strong><span>Focused field only</span></div><div><strong>03</strong><span>No raw-key storage</span></div></div></section>
+        <footer class="site-footer"><span>© KEYTRACE LAB · PRIVATE BY DESIGN</span><span>Educational redesign · MIT license attribution in repository</span></footer>
+      </main>
+    </div>
+  </div>
+  <script src="./metrics.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
