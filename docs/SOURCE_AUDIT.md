@@ -25,4 +25,3 @@ The replacement intentionally changes behavior, rather than attempting to make h
 - No typed characters in event history, aggregate JSON, or logs. Stopping wipes the sample input.
 - Modern standalone website, custom favicon, desktop app icon, tests, reproducible GitHub Pages deployment.
 
-Upstream repository: <https://github.com/ramprasathmk/keylogger>
